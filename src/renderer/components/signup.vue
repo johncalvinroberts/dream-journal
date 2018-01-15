@@ -47,7 +47,8 @@
           .catch(console.error)
       },
       checkCurrentUser () {
-        this.getCurrentUserAction()
+        const guy = this.getCurrentUserAction()
+        console.log(guy)
       }
     },
     computed: {}

@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "leancloud-storage": "^3.5.0",
+    "leancloud-storage": "^1.5.2",
     "md5": "^2.2.1",
     "muse-ui": "^2.1.0",
     "vue": "^2.3.3",

@@ -1,26 +1,24 @@
-import Lean from 'leancloud-storage'
+import AV from 'leancloud-storage/dist/av-es6'
 import {appId, appKey} from '../../../../app_keys'
 
 import { LOGIN, SIGNUP, LOGOUT, SET_CURRENT_USER } from '../mutation-types' // eslint-disable-line
 
-Lean.init({appId, appKey})
+AV.init({appId, appKey})
 
 const state = {
-  user: {},
-  signedIn: false
+  user: {}
 }
 const mutations = {
   [SET_CURRENT_USER]: (state, result) => {
     if (result) {
       state.user = result.attributes
       state.user.id = result.id
-      state.signedIn = true
     }
   }
 }
 const actions = {
   signupAction ({commit, store}, userInfo) {
-    const user = new Lean.User()
+    const user = new AV.User()
     return new Promise((resolve, reject) => {
       user.setUsername(userInfo.username)
       user.setPassword(userInfo.password)
@@ -31,7 +29,7 @@ const actions = {
   },
   loginAction ({commit, store}, userInfo) {
     return new Promise((resolve, reject) => {
-      Lean.User
+      AV.User
         .logIn(userInfo.username, userInfo.password)
         .then(loggedInUser => {
           resolve(loggedInUser)
@@ -41,9 +39,9 @@ const actions = {
     })
   },
   getCurrentUserAction ({commit, store}) {
-    const currentUser = Lean.User.current()
-    console.log(currentUser)
+    const currentUser = AV.User.current()
     if (currentUser) commit(SET_CURRENT_USER, currentUser)
+    return currentUser
   }
 }
 

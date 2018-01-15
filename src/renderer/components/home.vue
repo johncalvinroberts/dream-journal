@@ -8,6 +8,7 @@
 </template>
 <script>
   import dreamList from './home/DreamList'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'landing-page',
@@ -15,17 +16,19 @@
       dreamList
     },
     methods: {
+      ...mapActions({
+        getCurrentUserAction: 'getCurrentUserAction'
+      }),
       openLink (link) {
         this.$electron.shell.openExternal(link)
       }
     },
     mounted () {
-      const signedIn = this.$store.state.User.signedIn
-      if (signedIn) {
-        console.log(signedIn)
-      } else {
-        this.$router.replace('welcome')
-      }
+      this.getCurrentUserAction()
+        .then(currentUser => {
+          if (!currentUser) this.$router.replace('welcome')
+        })
+        .catch(console.error)
     }
   }
 </script>
