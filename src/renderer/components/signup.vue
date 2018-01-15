@@ -1,7 +1,19 @@
 <template>
   <div class="wrapper">
-    <div class="login--outer">
-      <div class="login--title">signup</div>
+    <div class="signup--outer">
+      <div class="login--title">sign up</div>
+      <div class="signup--form">
+        <form>
+          <mu-text-field v-model="user.username"
+                        hintText="create a username"
+                        :errorText="errors.usernameError"/><br/>
+          <mu-text-field v-model="user.password"
+                          hintText="create a password"
+                          :errorText="errors.passwordError"/><br/>
+          <mu-raised-button class="intro-button" label="sign me up" @click="submitSignup"/>
+          <mu-raised-button class="intro-button" label="get current user" @click="checkCurrentUser"/>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -13,19 +25,36 @@
       return {
         user: {
           username: '',
-          password: '',
-          email: ''
+          password: ''
+        },
+        errors: {
+          passwordError: '',
+          usernameError: ''
         }
       }
     },
     components: {},
     methods: {
       ...mapActions({
-        signupAction: 'signupAction'
-      })
+        signupAction: 'signupAction',
+        loginAction: 'loginAction',
+        getCurrentUserAction: 'getCurrentUserAction'
+      }),
+      submitSignup () {
+        this.signupAction(this.user)
+          .then(res => this.loginAction(this.user))
+          .then(res => console.log(res))
+          .catch(console.error)
+      },
+      checkCurrentUser () {
+        this.getCurrentUserAction()
+      }
     },
     computed: {}
   }
 </script>
 <style lang="scss">
+.signup--outer{
+  color: #fff;
+}
 </style>

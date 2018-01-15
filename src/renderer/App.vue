@@ -12,7 +12,7 @@
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+  @import "./assets/muse-theme-overrides";
   * {
     box-sizing: border-box;
     margin: 0;
