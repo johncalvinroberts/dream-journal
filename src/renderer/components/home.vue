@@ -11,7 +11,7 @@
   import { mapActions } from 'vuex'
 
   export default {
-    name: 'landing-page',
+    name: 'home',
     components: {
       dreamList
     },
