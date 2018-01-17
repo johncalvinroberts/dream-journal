@@ -3,7 +3,9 @@
     <div class="banner">
       <h1 class="title">dream journal</h1>
     </div>
-    <dream-list></dream-list>
+    <div class="home--grid">
+      <dream-list></dream-list>
+    </div>
   </div>
 </template>
 <script>
@@ -37,5 +39,10 @@
     .title{
       color: #fff;
     }
+  }
+  .home--grid {
+    display: grid;
+    grid-template-columns: 400px 1fr 1fr;
+    grid-template-rows: 100%;
   }
 </style>
